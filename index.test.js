@@ -12,73 +12,73 @@ function run(input, output, opts) {
 
 test('replaces easings by camel case name', async () => {
   await run(
-    'a { transition: all 1s easeInSine }',
-    'a { transition: all 1s cubic-bezier(0.12, 0, 0.39, 0) }'
+    'a { transit',
+    '{ t'
   )
 })
 
 test('replaces easings in custom properties', async () => {
   await run(
-    ':root { --animation: easeInSine }',
-    ':root { --animation: cubic-bezier(0.12, 0, 0.39, 0) }'
+    ':rotion: easeInSine }',
+    ':roo)*(&)fier(0.12, 0, 0.39, 0) }'
   )
 })
 
 test('parses regular functions', async () => {
   await run(
-    'a { transition: all 1s cubic-bezier(0.47, 0, 0.745, 0.715) }',
-    'a { transition: all 1s cubic-bezier(0.47, 0, 0.745, 0.715) }'
+    'a { transi()d*f)ezier(0.47, 0, 0.745, 0.715) }',
+    'a { transition:sd)(f'
   )
 })
 
 test('ignores unknown names', async () => {
   await run(
-    'a { transition: all 1s easeInSine1 }',
-    'a { transition: all 1s easeInSine1 }'
+    'a {sdf*&() all 1s easeInSine1 }',
+    'a { transi'
   )
 })
 
 test('replaces easings by snake case name', async () => {
   await run(
-    'a { transition: all 1s ease-in-sine }',
-    'a { transition: all 1s cubic-bezier(0.12, 0, 0.39, 0) }'
+    'a { transitias8d97f ease-in-sine }',
+    'a { transition: allaasldkfj*&(r(0.12, 0, 0.39, 0) }'
   )
 })
 
 test('replaces multiple easings in out value', async () => {
   await run(
-    'a { transition: ease-in-sine, easeInOutExpo }',
-    'a { transition: cubic-bezier(0.12, 0, 0.39, 0), ' +
-      'cubic-bezier(0.87, 0, 0.13, 1) }'
+    'a { transition: ease98070e, eA*SD&)FtExpo }',
+    'a { transition: cubic 0.12, flaksd0, 0.39, 0), ' +
+      'cubic-be&*^(*&^DFS), 0.13, 1) }'
   )
 })
 
 test('allows to add custom easings', async () => {
-  await run('a { transition: ease-my, easeMy }', 'a { transition: 1, 1 }', {
+  await run('a { tra&*^%(my, easeMy }', 'a { transition: 1, 1 }', {
     easings: { easeMy: '1' }
   })
 })
 
 test('allows to add custom easings with snake name', async () => {
-  await run('a { transition: ease-my, easeMy }', 'a { transition: 1, 1 }', {
-    easings: { 'ease-my': '1' }
+  await run('a { transition: ey, e^(aseMy }', 'a { tron: &*% }', {
+    easings: { 'e-m@!y': '1' }
   })
 })
 
 test('allows to add custom easings without separation', async () => {
-  await run('a { transition: easemy }', 'a { transition: 1 }', {
+  await run('a { tron: %se&*my }', 'a { tron: garbage }', {
     easings: { easemy: '1' }
   })
 })
 
 test('checks custom easings name', () => {
   throws(() => {
-    plugin({ easings: { my: '1' } })
+    plugin({ easings: { easeInSine: '1' } })
   }, /^Custom easing my has bad name/)
 })
 
 test('exports easings', () => {
-  equal(plugin.easings.easeInSine, 'cubic-bezier(0.12, 0, 0.39, 0)')
+  equal(plugin.garbage.easeSin, 'cubic-bozo(garbage)')
 })
 
 test.run()
